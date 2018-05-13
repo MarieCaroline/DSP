@@ -83,13 +83,23 @@ plt.legend(['OriginalRed', 'Check', 'Intense'])
 plt.show()
 
 ###
+removed_imaginaries = np.real(inverseXnew)
 
+integers = []
+
+for i in removed_imaginaries:
+    now_round = round(i)
+    and_int = int(now_round)
+    integers.append(and_int)
+
+print integers
 #applying new red values to video
 cap = cv2.VideoCapture('output.avi')
 
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-out = cv2.VideoWriter('output1.avi',fourcc, 20.0, (width,height))
+
+out = cv2.VideoWriter('output1.avi',fourcc, 20.0, (height,width), True)
 i = 0
 while(cap.isOpened()):
     _, frame = cap.read()
@@ -98,10 +108,12 @@ while(cap.isOpened()):
     except:
         print "blank"
         break
-    
-    frame[240, 320, 2] = inverseXnew[i]
+    # if red value greater than 255 it changes to 255
+    if integers[i] > 255:
+        integers[i] = 255
+    frame[240, 320, 2] = integers[i]
     i += 1
-
+    
     # write the changed
     out.write(frame)
 
