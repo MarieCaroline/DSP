@@ -12,18 +12,18 @@ finish_x = 380
 start_y = 155
 finish_y = 190
 
-start_freq = 45
-end_freq = 70
+start_freq = 40
+end_freq = 65
 
 stallTimer = 100
 
-length_recording = 0
+length_recording = 20
 
 cap = cv2.VideoCapture(0)
 
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('recording5.avi',fourcc, 20.0, (640,480))
+out = cv2.VideoWriter('input.avi',fourcc, 20.0, (640,480))
 start_time = time.time()
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -45,7 +45,7 @@ cap.release()
 out.release()
 cv2.destroyAllWindows()
 
-cap = cv2.VideoCapture('recording4.avi')
+cap = cv2.VideoCapture('input.avi')
 Rvalues = []
 #frameNum = 0 #
 while(cap.isOpened()):
@@ -140,11 +140,11 @@ else:
     text = "%s bpm" %(int(round(np.mean(heart_rates))))
 
 #applying new red values to video
-cap = cv2.VideoCapture('recording4.avi')
+cap = cv2.VideoCapture('input.avi')
 
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-out = cv2.VideoWriter('recording_output.avi',fourcc, 20.0, (height,width), True)
+out = cv2.VideoWriter('output4.avi',fourcc, 20.0, (height,width), True)
 
 i = 0
 #frameNum = 0 #
